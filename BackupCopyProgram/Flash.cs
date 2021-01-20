@@ -8,7 +8,7 @@ namespace BackupCopyProgram
     {
         public double USB3SpeedInMbPerSecond { get; set; }
         public double MemorySize { get; set; }
- 
+
         public override double GetMemoryVolume()
         {
             return MemorySize;
@@ -24,8 +24,8 @@ namespace BackupCopyProgram
                 {
                     spaceOfMemory -= data;
                     sizeOfData -= data;
-                } 
-                else if(sizeOfData <= 0)
+                }
+                else if (sizeOfData <= 0)
                 {
                     Console.WriteLine($"Files are successfully copied to your devices. {countOfDevices} device(s) were used.\n" +
                         $"It took {((tmpSizeOfData * 1024) / ((USB3SpeedInMbPerSecond * 1000) / 8)) / 60} minutes");
@@ -36,7 +36,7 @@ namespace BackupCopyProgram
                     countOfDevices++;
                     spaceOfMemory = MemorySize;
                 }
-            }        
+            }
         }
         public override string GetInfoAboutFreeVolumeOfMemoryOnDevice()
         {

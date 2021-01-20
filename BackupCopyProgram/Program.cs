@@ -6,10 +6,8 @@ namespace BackupCopyProgram
     {
         static void Main(string[] args)
         {
-
             double sizeOfData = 565;
             double file = 0.78;
-
             var devices = new Storage[3] {
            new Flash{NameOfStorage = "USB",
                Model = "Transcend",
@@ -25,14 +23,13 @@ namespace BackupCopyProgram
                Model = "Transcend",
                USB2SpeedInMbPerSecond = 22.3,
                spaceOfMemory = 512,
-               CountOfSections = 10,              
+               CountOfSections = 10,
                SectionsVolume = 51.2}
            };
-            foreach(var device in devices)
+            foreach (var device in devices)
             {
                 device.CopyDataToDevice(file, sizeOfData);
             }
-
         }
     }
 }
