@@ -8,24 +8,39 @@ namespace BackupCopyProgram
     {
         public double USB3SpeedInMbPerSecond { get; set; }
         public double MemorySize { get; set; }
+ 
         public override double GetMemoryVolume()
         {
             return MemorySize;
         }
-        public override void CopyDataToDevice(double data)
+        public override void CopyDataToDevice(double data, double sizeOfData)
         {
-            if (spaceOfMemory <= MemorySize)
+            bool isCopyFinished = true;
+            int countOfDevices = 0;
+            double tmpSizeOfData = sizeOfData;
+            while (isCopyFinished)
             {
-                spaceOfMemory += data;
-            }
-            else
-            {
-                Console.WriteLine($"Not enough memory, to copy this data! There is {MemorySize - spaceOfMemory} free space left.");
-            }
+                if (spaceOfMemory - data >= 0)
+                {
+                    spaceOfMemory -= data;
+                    sizeOfData -= data;
+                } 
+                else if(sizeOfData <= 0)
+                {
+                    Console.WriteLine($"Files are successfully copied to your devices. {countOfDevices} device(s) were used.\n" +
+                        $"It took {((tmpSizeOfData * 1024) / ((USB3SpeedInMbPerSecond * 1000) / 8)) / 60} minutes");
+                    isCopyFinished = false;
+                }
+                else
+                {
+                    countOfDevices++;
+                    spaceOfMemory = MemorySize;
+                }
+            }        
         }
         public override string GetInfoAboutFreeVolumeOfMemoryOnDevice()
         {
-            return $"There is: {MemorySize - spaceOfMemory} free space left.";
+            return $"There is: {spaceOfMemory} free space left.";
         }
         public override string GetFullInfoAboutDevice()
         {

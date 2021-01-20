@@ -8,9 +8,9 @@ namespace BackupCopyProgram
     {
         public string NameOfStorage { get; set; }
         public string Model { get; set; }
-        public double spaceOfMemory = 0;
+        public double spaceOfMemory;
         public abstract double GetMemoryVolume();
-        public abstract void CopyDataToDevice(double data);
+        public abstract void CopyDataToDevice(double data, double sizeOfData);
         /* получение информации о свободном объеме памяти на устройстве;
          получение общей/полной информации об устройстве.*/
         public abstract string GetInfoAboutFreeVolumeOfMemoryOnDevice();
